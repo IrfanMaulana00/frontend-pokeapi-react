@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     const refreshToken = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/token');
+            const response = await axios.get('http://45.76.151.160:5000/token');
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setName(decoded.name);
@@ -33,7 +33,7 @@ const Dashboard = () => {
 
     const getPokemon = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/pokemon');
+            const response = await axios.get('http://45.76.151.160:5000/pokemon');
             if ( !response.data.message ) {
                 setPokemon(response.data);
             } else {
@@ -51,7 +51,7 @@ const Dashboard = () => {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('http://localhost:5000/token');
+            const response = await axios.get('http://45.76.151.160:5000/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);

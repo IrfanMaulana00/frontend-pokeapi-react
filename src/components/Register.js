@@ -14,7 +14,7 @@ const Register = () => {
         e.preventDefault();
         try {
             console.log("POST");
-            await axios.post('http://localhost:5000/users', {
+            await axios.post('http://45.76.151.160:5000/users', {
                 name: name,
                 email: email,
                 password: password,

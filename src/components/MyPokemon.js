@@ -20,7 +20,7 @@ const MyPokemon = () => {
 
     const refreshToken = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/token');
+            const response = await axios.get('http://45.76.151.160:5000/token');
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setName(decoded.name);
@@ -34,7 +34,7 @@ const MyPokemon = () => {
 
     const getMyPokemon = async () => {
         try {
-            const response = await axiosJWT.get(`http://localhost:5000/my-pokemon`, {
+            const response = await axiosJWT.get(`http://45.76.151.160:5000/my-pokemon`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -51,7 +51,7 @@ const MyPokemon = () => {
             const newName = prompt("Ganti nama menjadi ? ");
             if ( !newName ) return alert("Nama tidak boleh kosong");
 
-            const response = await axiosJWT.patch(`http://localhost:5000/update-pokemon/${idPokemon}`, {
+            const response = await axiosJWT.patch(`http://45.76.151.160:5000/update-pokemon/${idPokemon}`, {
                 nama: newName
             }, {
                 headers: {
@@ -68,7 +68,7 @@ const MyPokemon = () => {
 
     const lepaskanPoke = async(idPokemon) => {
         try {
-            const response = await axiosJWT.delete(`http://localhost:5000/delete-pokemon/${idPokemon}`, {
+            const response = await axiosJWT.delete(`http://45.76.151.160:5000/delete-pokemon/${idPokemon}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -87,7 +87,7 @@ const MyPokemon = () => {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('http://localhost:5000/token');
+            const response = await axios.get('http://45.76.151.160:5000/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
