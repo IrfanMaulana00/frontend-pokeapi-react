@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import ip from "ip";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const Login = () => {
     const Auth = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/login', {
+            await axios.post(`http://${ip.address()}:5000/login`, {
                 email: email,
                 password: password
             });
